@@ -7,7 +7,6 @@ use App\Models\M_Karyawan;
 use App\Models\M_shift;
 use App\Models\M_absen;
 use App\Models\M_shifthour;
-use App\Models\M_absen;
 use Carbon\Carbon;
 
 class c_absen extends Controller
@@ -31,6 +30,7 @@ class c_absen extends Controller
         $d_karyawan = $M_karyawan->view_data('karyawans',$whereKaryawan)->first();
       
         if(!empty($d_karyawan)){
+           // dd($d_karyawan);
             $whereshift = array ('is_active'=>'t',
                              'karyawan_id'=>$d_karyawan['karyawan_id'],
                              'tanggal'=>Carbon::now()->format('Y-m-d'));
@@ -40,13 +40,20 @@ class c_absen extends Controller
                                         'shifthours_id'=>$d_shift['shifthours_id']);
                 $d_shifthour = $M_shifthour->view_data('shifthours',$whereshiftHour)->first();
                 if(!empty($d_shifthour)){
-                    // cari apakah pada tabel absen sudah tertinput untuk hari ini jika blm maka 
-                    // dianggap sebagai in jika sudah ada maka dianggap sebagai out
-                    $in = $d_shifthour['in'];
-                    if($now > $in){
-                       //input absen tepat waktu 
-                    }else if($now < $in){
-                        //input absen terlambat.
+                    $where_absen = array('is_active'=>'t',
+                                        'karyawan_id'=>$d_karyawan['karyawan_id'],
+                                        'shift_id'=>$d_shift['shift_id']);
+                    $d_absen = M_absen::view_data('absens',$where_absen)->first();
+                    if(!empty($d_absen)){
+                        // update out atas absen id tersebut; 
+                    }
+                    else{
+                        $in = $d_shifthour['in'];
+                        if($now > $in){
+                            //input absen tepat waktu 
+                        }else if($now < $in){
+                            //input absen terlambat.
+                        }
                     }
                 }
             }
