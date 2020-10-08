@@ -15,4 +15,10 @@ class M_absen extends Model
     {
         DB::table($table)->insert($data);
     }
+
+    public function update_data($where,$table, $data)
+    {
+        DB::table($table)->update($data);
+    }
+
 }
