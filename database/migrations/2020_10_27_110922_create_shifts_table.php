@@ -20,8 +20,10 @@ class CreateShiftsTable extends Migration
             $table->bigInteger('karyawan_id');
             $table->string('shift', 5);
             $table->date('tanggal');
+            $table->bigInteger('shifthours_id');
             
             $table->foreign('karyawan_id')->references('karyawan_id')->on('karyawans');
+            $table->foreign('shifthours_id')->references('shifthours_id')->on('shifthours');
         });
     }
 

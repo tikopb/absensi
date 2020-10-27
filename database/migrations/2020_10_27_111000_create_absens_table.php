@@ -19,15 +19,14 @@ class CreateAbsensTable extends Migration
             $table->timestamps();
             $table->string('nik', 100);
             $table->string('nama', 100);
-            $table->timestamp('in', 0);
-            $table->timestamp('out', 0);
+            $table->time('in', 0);
+            $table->time('out', 0);
             $table->bigInteger('karyawan_id');
             $table->bigInteger('shift_id');
             $table->string('description', 100);
             
             $table->foreign('karyawan_id')->references('karyawan_id')->on('karyawans');
             $table->foreign('shift_id')->references('shift_id')->on('shifts');
-
         });
     }
 

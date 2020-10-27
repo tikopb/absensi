@@ -13,3 +13,4 @@
 
 Route::get('/', 'c_absen@index');
 Route::post('process-absen', 'c_absen@process_absen')->name('process_absen');
+Route::get('/home', 'HomeController@index');
