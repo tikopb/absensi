@@ -46,11 +46,11 @@ class c_absen extends Controller
                     $d_absen = M_absen::view_data('absens',$where_absen)->first();
                     if(!empty($d_absen)){
                         $data = array(
-                            'updated_by' => $d_karyawan['karyawan_id'],
-                            'updated_at' => now(),
+                            'updated_by'  => $d_karyawan['karyawan_id'],
+                            'updated_at'  => now(),
                             'karyawan_id' => $d_karyawan['karyawan_id'],
-                            'shift_id' => $d_shift['shift_id'],
-                            'out' => now()
+                            'shift_id'    => $d_shift['shift_id'],
+                            'out'         => now()
                         );
                         $whereupdate = array('is_active'=>'t');
                         M_absen::update_data($whereupdate,'absens',$data) ;
@@ -59,25 +59,25 @@ class c_absen extends Controller
                         $in = $d_shifthour['in']->format('H:i');
                         if($now > $in){
                             $data = array(
-                                'created_by' => $d_karyawan['karyawan_id'],
-                                'updated_by' => $d_karyawan['karyawan_id'],
-                                'created_at' => now(),
-                                'updated_at' => now(),
+                                'created_by'  => $d_karyawan['karyawan_id'],
+                                'updated_by'  => $d_karyawan['karyawan_id'],
+                                'created_at'  => now(),
+                                'updated_at'  => now(),
                                 'karyawan_id' => $d_karyawan['karyawan_id'],
-                                'shift_id' => $d_shift['shift_id'],
-                                'in' => now(),
+                                'shift_id'    => $d_shift['shift_id'],
+                                'in'          => now(),
                                 'description' => 'Datang Tepat Waktu'
                             );
                             M_absen::add_data_process('absens',$data) ;
                         }else if($now < $in){
                             $data = array(
-                                'created_by' => $d_karyawan['karyawan_id'],
-                                'updated_by' => $d_karyawan['karyawan_id'],
-                                'created_at' => now(),
-                                'updated_at' => now(),
+                                'created_by'  => $d_karyawan['karyawan_id'],
+                                'updated_by'  => $d_karyawan['karyawan_id'],
+                                'created_at'  => now(),
+                                'updated_at'  => now(),
                                 'karyawan_id' => $d_karyawan['karyawan_id'],
-                                'shift_id' => $d_shift['shift_id'],
-                                'in' => now(),
+                                'shift_id'    => $d_shift['shift_id'],
+                                'in'          => now(),
                                 'description' => 'Terlambat Datang'
                             );
                             M_absen::add_data_process('absens',$data) ;

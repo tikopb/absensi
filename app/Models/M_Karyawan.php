@@ -12,8 +12,13 @@ class M_Karyawan extends Model
         return DB::table($table)->where($where);
     }
 
-    public function add_data_process($table, $data)
+    public function add_data_karyawan($table, $data)
     {
         DB::table($table)->insert($data);
+    }
+
+    public function delete_data_karyawan($table, $data)
+    {
+        DB::table($table)->delete($data);
     }
 }
