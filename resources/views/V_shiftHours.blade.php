@@ -4,7 +4,7 @@
     @include('V_Menu')
 @endsection 
 
-@section('title','Data Jam Kerja')
+@section('title','Data Karyawan')
 
 @section('content')
 <!-- Main content -->
@@ -19,7 +19,7 @@
           <div class="card-body">
             <div class='row'>
               <div class="col-lg-2">
-                <a href="#" class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#Modal-add-shiftHour"><i class='fas fa-plus-circle'></i> Input Karyawan</a>
+                <a href="#" class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#Modal-add-shiftHour"><i class='fas fa-plus-circle'></i> Add Jam Kerja</a>
               </div>    
             </div>
             <br>
@@ -79,7 +79,7 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Tambah karyawan</h4>
+        <h4 class="modal-title">Tambah Jam Kerja</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -89,7 +89,8 @@
           @csrf
             <div class="form-group">
               <label for="in_app_code">Value</label>
-              <input tyKaryawan
+              <input type="text" name="in_sh_value" class="form-control" id="in_app_code" placeholder="VALUE" required>
+            </div>
             <div class="form-group">
               <label for="in_app_name">Nama</label>
               <input type="text" name="in_sh_nama" class="form-control" id="in_app_name" placeholder="Nama" required>

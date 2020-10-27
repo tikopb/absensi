@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Models\M_shift;
 use App\Models\M_Karyawan;
@@ -11,16 +12,16 @@ class c_shift extends Controller
 {
     public function index()
     {
-        $M_shift = new M_shift();
-        $M_Karyawan = new M_Karyawan();
-        $M_shiftHour = new M_shiftHour();
-        $where   = array('is_active'=>'t');
+        $dataShift = DB::table('shifts')
+            ->leftJoin('karyawans', 'shifts.karyawan_id', '=', 'karyawans.karyawan_id')
+            ->leftJoin('shifthours', 'shifts.shifthours_id', '=', 'shifthours.shifthours_id')
+            ->select('karyawans.nik', 'karyawans.nama as karyawanName', 'shifthours.nama as shiftName','shifts.tanggal','shifts.shift_id')
+            ->get();
 
-        $d_shift = $M_shift->view_data('shifthours',$where)->get();
         $data    = array (
-            'data_shift' => $d_shift
+            'data_shift' => $dataShift
         );
-        return view('V_shift',$data);
+        return view('V_Shift',$data);
     }
 
     //app

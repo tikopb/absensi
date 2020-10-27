@@ -14,13 +14,19 @@
 			<div class="col-lg-12">
         <div class="card card-primary card-outline">
           <div class="card-header">
-            <h5 class="m-0">Jam Kerja</h5>
+            <h5 class="m-0">Shift</h5>
           </div>
           <div class="card-body">
             <div class='row'>
               <div class="col-lg-2">
-                <a href="#" class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#Modal-add-shiftHour"><i class='fas fa-plus-circle'></i> Input Karyawan</a>
-              </div>    
+                <a href="#" class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#Modal-add-shiftHour"><i class='fas fa-plus-circle'></i> Input Manual Absen</a>
+              </div>   
+              <div class="col-lg-2">
+                <a href="#" class="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#Modal-add-shiftHour"><i class='fas fa-download'></i> Download Absen</a>
+              </div>  
+              <div class="col-lg-2">
+                <a href="#" class="btn btn-block btn-info btn-sm" data-toggle="modal" data-target="#Modal-add-shiftHour"><i class='fas fa-upload'></i> Import Absen</a>
+              </div> 
             </div>
             <br>
             <div class="table-responsive">
@@ -28,10 +34,10 @@
                 <thead>
                   <tr>
                     <th style="background-color:#66A1D2;" width="5%">No</th>
-                    <th style="background-color:#66A1D2;" width="5%">value</th>
-                    <th style="background-color:#66A1D2;" width="20%">Nama</th>
-                    <th style="background-color:#66A1D2;" width="10%">In</th>
-                    <th style="background-color:#66A1D2;" width="10%">Out</th>
+                    <th style="background-color:#66A1D2;" width="5%">Nik</th>
+                    <th style="background-color:#66A1D2;" width="20%">Nama Karyawan</th>
+                    <th style="background-color:#66A1D2;" width="10%">Shift</th>
+                    <th style="background-color:#66A1D2;" width="10%">Tanggal</th>
                     <th style="background-color:#66A1D2;" width="15%">Option</th>
                   </tr>
                 </thead>
@@ -42,10 +48,10 @@
                   ?>
                   <tr>
                     <td>{{ $no++}}</td>
-                    <td>{{ $dshift->value }}</td>
-                    <td>{{ $dshift->nama }}</td>
-                    <td>{{ $dshift->in }}</td>
-                    <td>{{ $dshift->out }}</td>
+                    <td>{{ $dshift->nik }}</td>
+                    <td>{{ $dshift->karyawanName}}</td>
+                    <td>{{ $dshift->shiftName }}</td>
+                    <td>{{ $dshift->tanggal }}</td>
                     <td>
                         <!-- modal action  start -->
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#Modal-edit-product-category">

@@ -30,10 +30,10 @@
           </li>
         
           <li class="nav-item">
-            <a href="/dataAbsen" class="nav-link">
+            <a href="/shifts" class="nav-link">
               <i class="nav-icon fas fa-database"></i>
               <p>
-                Absensi
+                Shift
               </p>
             </a>
           </li>
