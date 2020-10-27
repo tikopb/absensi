@@ -11,7 +11,7 @@ class M_shift extends Model
         return DB::table($table)->where($where);
     }
 
-    public function add_data_process($table, $data)
+    public function add_data_shift($table, $data)
     {
         DB::table($table)->insert($data);
     }

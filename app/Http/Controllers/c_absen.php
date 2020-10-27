@@ -6,15 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\M_Karyawan;
 use App\Models\M_shift;
 use App\Models\M_absen;
-use App\Models\M_shifthour;
+use App\Models\M_shiftHour;
 use Carbon\Carbon;
 
 class c_absen extends Controller
 {
-    public function index()
+    public function homeAbsen()
     {
-        return view('v_absen');   
+        return view('v_homeabsen');   
     }
+    
     //app
     public function process_absen(Request $request)
     {
@@ -22,7 +23,7 @@ class c_absen extends Controller
         //dd($now);
         $M_karyawan = new M_karyawan;
         $M_shift = new M_shift;
-        $M_shifthour = new M_shifthour;
+        $M_shiftHour = new M_shiftHour;
         $M_Absen = new M_absen;
         $barcode = $request->input('in_app_barcode');
         $whereKaryawan = array('is_active'=>'t',
@@ -38,7 +39,7 @@ class c_absen extends Controller
             if(!empty($d_shift)){
                 $whereshiftHour = array ('is_active'=>'t',
                                         'shifthours_id'=>$d_shift['shifthours_id']);
-                $d_shifthour = $M_shifthour->view_data('shifthours',$whereshiftHour)->first();
+                $d_shifthour = $M_shiftHour->view_data('shifthours',$whereshiftHour)->first();
                 if(!empty($d_shifthour)){
                     $where_absen = array('is_active'=>'t',
                                         'karyawan_id'=>$d_karyawan['karyawan_id'],
