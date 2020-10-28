@@ -19,13 +19,13 @@
           <div class="card-body">
             <div class='row'>
               <div class="col-lg-2">
-                <a href="#" class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#Modal-add-shiftHour"><i class='fas fa-plus-circle'></i> Input Manual Absen</a>
+                <a href="#" class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#Modal-add-shift"><i class='fas fa-plus-circle'></i> Input Manual Absen</a>
               </div>   
               <div class="col-lg-2">
-                <a href="#" class="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#Modal-add-shiftHour"><i class='fas fa-download'></i> Download Absen</a>
+                <a href="#" class="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#Modal-download-shift"><i class='fas fa-download'></i> Download Absen</a>
               </div>  
               <div class="col-lg-2">
-                <a href="#" class="btn btn-block btn-info btn-sm" data-toggle="modal" data-target="#Modal-add-shiftHour"><i class='fas fa-upload'></i> Import Absen</a>
+                <a href="#" class="btn btn-block btn-info btn-sm" data-toggle="modal" data-target="#Modal-import-shift"><i class='fas fa-upload'></i> Import Absen</a>
               </div> 
             </div>
             <br>
@@ -80,8 +80,63 @@
 </div>
 <!-- /.content -->
 
-<!-- Modal Add Karyawan -->
-<div class="modal fade" id="Modal-add-shiftHour">
+<!-- Modal Add shift -->
+<div class="modal fade" id="Modal-add-shift">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Tambah shift</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url('process_add_shift') }}" method="POST">
+          @csrf
+          <div class="form-group">
+            <label for="in_karyawan_id">Karyawan</label>
+            <select name="in_karyawan_id" class="form-control" placeholder="App" required>
+              <option value="">Pilih Karyawan</option>
+              <?php
+                foreach ($data_karyawan as $dkaryawan) {
+              ?>
+                <option value="{{ $dkaryawan->karyawan_id }}">{{ $dkaryawan->nama }}</option>
+              <?php } ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="in_shifthour_id">Jam Kerja</label>
+            <select name="in_shifthour_id" class="form-control" placeholder="App" required>
+              <option value="">Pilih Jam Kerja</option>
+              <?php
+                foreach ($data_shiftHour as $dshiftHour) {
+              ?>
+                <option value="{{ $dshiftHour->shifthours_id }}">{{ $dshiftHour->nama }}</option>
+              <?php } ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tanggal</label>
+                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                  <input type="text" name="testname"  id="reservationdate-add" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                  <div class="input-group-append" data-target="#reservationdate-add" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
+          </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+<!-- Modal Add shift -->
+
+<!-- Modal Download shift -->
+<div class="modal fade" id="Modal-download-shift">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
@@ -93,31 +148,69 @@
       <div class="modal-body">
         <form action="{{ url('process_add_shiftHour') }}" method="POST">
           @csrf
-            <div class="form-group">
-              <label for="in_app_code">Value</label>
-              <input type="text" name="in_sh_value" class="form-control" id="in_app_code" placeholder="VALUE" required>
-            </div>
-            <div class="form-group">
-              <label for="in_app_name">Nama</label>
-              <input type="text" name="in_sh_nama" class="form-control" id="in_app_name" placeholder="Nama" required>
-            </div>
-            <div class="form-group">
-              <label for="in_app_name">In</label>
-              <input type="time" name="in_sh_in" class="form-control" id="in_app_name" placeholder="In" required>
-            </div>
-            <div class="form-group">
-              <label for="in_app_name">Out</label>
-              <input type="time" name="in_sh_out" class="form-control" id="in_app_name" placeholder="Out" required>
-            </div>
+          <div class="form-group">
+            <label>Date From:</label>
+              <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                  <input type="text" name="testname"  id="reservationdate-from" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                  <div class="input-group-append" data-target="#reservationdate-from" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+              </div>
+          </div>
+          <div class="form-group">
+            <label>Date To:</label>
+              <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                  <input type="text" id="reservationdate-to" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                  <div class="input-group-append" data-target="#reservationdate-to" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+              </div>
+          </div>
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit">Download</button>
       </div>
           </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div>
-<!-- Modal Add Karyawan -->
+<!-- Modal Download shift -->
+
+<!-- Modal import shift -->
+<div class="modal fade" id="Modal-import-shift">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Tambah karyawan</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url('process_add_shiftHour') }}" method="POST">
+          @csrf
+          <div class="form-group">
+            <label for="exampleInputFile">Import File Excel</label>
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="exampleInputFile">
+                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+              </div>
+              <div class="input-group-append">
+                <span class="input-group-text">Upload</span>
+              </div>
+            </div>
+      </div>
+    </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button class="btn btn-primary" type="submit">Download</button>
+      </div>
+          </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+<!-- Modal import shift -->
 
 @endsection

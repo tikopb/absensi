@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Models\M_Karyawan;
 use App\Models\M_shift;
@@ -16,6 +17,28 @@ class c_absen extends Controller
         return view('v_homeabsen');   
     }
     
+    public function index()
+    {
+        $M_Karyawan = new M_Karyawan();
+        $M_shiftHour = new M_shiftHour();
+
+        $dataAbsen = DB::table('absens')
+        ->leftJoin('shifts', 'absens.shift_id', '=', 'shifts.shift_id')
+        ->leftJoin('karyawans', 'absens.karyawan_id', '=', 'karyawans.karyawan_id')
+        ->select('shifts.tanggal', 'karyawans.nama as karyawanName','absens.in','absens.out','absens.description')
+        ->orderby('shifts.tanggal')
+        ->get();
+
+        $where       = array('is_active'=>'t');
+        $d_karyawan  = $M_Karyawan->view_data('karyawans', $where)->get();
+
+        $data = array (
+            'data_Absen' => $dataAbsen,
+            'data_karyawan'  => $d_karyawan
+        );
+        return view ('V_Absen',$data);
+    }
+
     //app
     public function process_absen(Request $request)
     {

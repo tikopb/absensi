@@ -20,6 +20,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.css') }}">
   
 </head>
 {{-- <body class="hold-transition sidebar-mini {{ $sidebar }}"> --}}
@@ -128,6 +130,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<!-- date-range-picker -->
+<script src="{{ asset('adminlte/plugins/moment/moment.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.js') }}"></script>
+<!-- bs-custom-file-input -->
+<script src="{{ asset('adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 
 <!-- Page specific script -->
 <script>
@@ -209,6 +216,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
       "responsive": true,
     });
 
+    //Date range picker
+    $('#reservationdate-add').daterangepicker({
+      "singleDatePicker": true,
+    });
+
+    $('#reservationdate-from').daterangepicker({
+      "singleDatePicker": true,
+    });
+
+    $('#reservationdate-to').daterangepicker({
+      "singleDatePicker": true,
+    });
+
+    $(function () {
+      bsCustomFileInput.init();
+    });
 </script>
 
 </body>

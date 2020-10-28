@@ -11,29 +11,49 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="/karyawan" class="nav-link">
-              <i class="nav-icon fas fa-address-book"></i>
+          <li class="nav-item menu-close">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
               <p>
-                Data Karyawan
+                Master Data
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/karyawan" class="nav-link">
+                  <i class="nav-icon fas fa-address-book"></i>
+                  <p>
+                    Data Karyawan
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/shiftHour" class="nav-link">
+                  <i class="nav-icon fas fa-hourglass"></i>
+                  <p>
+                    Jam Kerja
+                  </p>
+                </a>
+              </li>
+            </ul>
           </li>
 
-          <li class="nav-item">
-            <a href="/shiftHour" class="nav-link">
-              <i class="nav-icon fas fa-hourglass"></i>
-              <p>
-                Jam Kerja
-              </p>
-            </a>
-          </li>
-        
           <li class="nav-item">
             <a href="/shifts" class="nav-link">
               <i class="nav-icon fas fa-database"></i>
               <p>
                 Shift
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/absen" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Absen
               </p>
             </a>
           </li>

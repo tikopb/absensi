@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB; 
 
 class M_shift extends Model
 {
@@ -14,5 +15,10 @@ class M_shift extends Model
     public function add_data_shift($table, $data)
     {
         DB::table($table)->insert($data);
+    }
+
+    public function update_data_shift($table, $data, $where)
+    {
+        DB::table($table)->where($where)->update($data);
     }
 }
