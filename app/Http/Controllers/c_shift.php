@@ -9,6 +9,9 @@ use App\Models\M_shift;
 use App\Models\M_Karyawan;
 use App\Models\M_shiftHour;
 use Excel;
+use DatePeriod;
+use DateTime;
+use DateInterval;
 
 class c_shift extends Controller
 {
@@ -28,7 +31,7 @@ class c_shift extends Controller
         $where       = array('is_active'=>'t');
         $d_karyawan  = $M_Karyawan->view_data('karyawans', $where)->get();
         $d_shiftHour = $M_shiftHour->view_data('shifthours', $where)->get();
-        $data    = array (
+        $data        = array (
             'data_shift'     => $dataShift,
             'data_karyawan'  => $d_karyawan,
             'data_shiftHour' => $d_shiftHour
@@ -42,10 +45,42 @@ class c_shift extends Controller
         $M_shift = new M_shift();
         $karyawan_id  = $request->input('in_karyawan_id');
         $shifthour_id = $request->input('in_shifthour_id');
-        $tanggal            = $request->input('testname');
+        $tanggal      = $request->input('reservationdate-add');
 
         $this->addShift($karyawan_id,$tanggal,$shifthour_id);
         return redirect(url('shifts'));
+    }
+
+    public function DownloadShiftXls(Request $request){
+        $period = new DatePeriod(
+            new DateTime($request->input('reservationdate-from')),
+            new DateInterval('P1D'),
+            new DateTime($request->input('reservationdate-to'))
+        );
+        foreach($period as $date){
+            $data = array ($date->format("Ymd"));
+        };
+        dd($data);
+        $d_karyawan = DB::table('karyawans')
+        ->where('is_active',true)->get();
+
+        $filename = 'Data Shift Between '.$request->input('reservationdate-from').' - until -  '.$request->input('reservationdate-to');
+        $export = \Excel::create($filename, function($excel) use ($period, $d_karyawan) {
+            $excel->sheet('shift', function($sheet) use($period, $d_karyawan) {
+                $sheet->appendRow(array(
+                    'nama','tanggal','shift'
+                ));
+                $data->chunk(100, function($rows) use ($sheet,$period, $d_karyawan){
+                    foreach ($period as $d_period) {
+                        foreach($d_karyawan as $d_karyawan ) {
+                            $sheet->appendRow(array(
+                                $d_karyawan->nama
+                            ));
+                        }   
+                    }
+                });
+            });
+        });
     }
 
     public function uploadShiftXls(Request $request){
@@ -55,21 +90,26 @@ class c_shift extends Controller
                 $path = $request->file_upload->getRealPath();
                 $datax = \Excel::selectSheetsByIndex(0)->load($path)->get();  
                 try{
+                    DB::beginTransaction();
                     foreach ($datax as $dx) {
-                        
-                        $nama = trim(strtoupper($dx->nama));
-                        $tanggal =  date_format(date_create(trim($dx->tanggal)), 'Y-m-d');
-                        //$tanggal = Carbon::createFromFormat('d F, Y', trim($dx->tanggal))->format('Y-m-d');
-                        $shift = trim(strtoupper($dx->shift));
+                        if(trim($dx-> nama) != null && trim($dx-> tanggal) != null && trim($dx->shift)){
+                            $nama = trim(strtoupper($dx->nama));
+                            $tanggal =  date_format(date_create(trim($dx->tanggal)), 'Y-m-d');
+                            //$tanggal = Carbon::createFromFormat('d F, Y', trim($dx->tanggal))->format('Y-m-d');
+                            $shift = trim(strtoupper($dx->shift));
 
-                        $d_karyawan = DB::table('karyawans')
-                        ->where('nama',$nama)->where('is_active',true)->first();
+                            $d_karyawan = DB::table('karyawans')
+                            ->where('nama',$nama)->where('is_active',true)->first();
+                            
+                            $d_shiftHour = DB::table('shifthours')
+                            ->where('value',$shift)->where('is_active',true)->first();
 
-                        $d_shiftHour = DB::table('shifthours')
-                        ->where('value',$shift)->where('is_active',true)->first();
-
-                        $this->addShift($d_karyawan->karyawan_id,$tanggal,$d_shiftHour->shifthours_id);
+                            if($d_karyawan != null && $d_shiftHour != null){
+                                $this->addShift($d_karyawan->karyawan_id,$tanggal,$d_shiftHour->shifthours_id);
+                            }
+                        }
                     }
+                    DB::commit();
                 }
                 catch (Exception $ex) {
                     db::rollback();

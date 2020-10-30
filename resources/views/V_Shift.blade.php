@@ -118,7 +118,7 @@
           <div class="form-group">
             <label>Tanggal</label>
                 <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                  <input type="text" name="testname"  id="reservationdate-add" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                  <input type="text" name="reservationdate-add"  id="reservationdate-add" class="form-control datetimepicker-input" data-target="#reservationdate"/>
                   <div class="input-group-append" data-target="#reservationdate-add" data-toggle="datetimepicker">
                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                   </div>
@@ -146,12 +146,12 @@
           </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url('process_add_shiftHour') }}" method="POST">
+        <form action="{{ url('download_shift') }}" method="POST">
           @csrf
           <div class="form-group">
             <label>Date From:</label>
               <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                  <input type="text" name="testname"  id="reservationdate-from" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                  <input type="text" name="reservationdate-from"  id="reservationdate-from" class="form-control datetimepicker-input" data-target="#reservationdate"/>
                   <div class="input-group-append" data-target="#reservationdate-from" data-toggle="datetimepicker">
                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                   </div>
@@ -160,7 +160,7 @@
           <div class="form-group">
             <label>Date To:</label>
               <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                  <input type="text" id="reservationdate-to" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                  <input type="text" name="reservationdate-to" id="reservationdate-to" class="form-control datetimepicker-input" data-target="#reservationdate"/>
                   <div class="input-group-append" data-target="#reservationdate-to" data-toggle="datetimepicker">
                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                   </div>
