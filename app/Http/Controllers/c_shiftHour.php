@@ -32,7 +32,7 @@ class c_shiftHour extends Controller
             'created_at'  => now(),
             'updated_at'  => now(),
             'value'       => $shiftHour_value,
-            'nama'        => $shiftHour_nama,
+            'nama'        => strtoupper($shiftHour_nama),
             'in'          => $shiftHour_in,
             'out'         => $shiftHour_out,
             'description' => ' '

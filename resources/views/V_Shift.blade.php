@@ -188,26 +188,23 @@
           </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url('process_add_shiftHour') }}" method="POST">
+        <form action="{{ route('uploud_shift') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
             <label for="exampleInputFile">Import File Excel</label>
             <div class="input-group">
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="exampleInputFile">
+                <input type="file" class="custom-file-input" name="file_upload" id="exampleInputFile">
                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
               </div>
-              <div class="input-group-append">
-                <span class="input-group-text">Upload</span>
-              </div>
             </div>
-      </div>
-    </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" type="submit">Download</button>
-      </div>
-          </form>
+          </div>
+        </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="submit">Uploud</button>
+          </div>
+        </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div>

@@ -30,7 +30,7 @@ class c_karyawan extends Controller
             'created_at' => now(),
             'updated_at' => now(),
             'nik' => $karyawan_nik,
-            'nama' => $karyawan_nama,
+            'nama' => strtoupper($karyawan_nama),
             'barcode' => $karyawan_barcode,
             'fingerprint' => 'default'
         );

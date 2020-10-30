@@ -23,9 +23,12 @@ Route::get('/shiftHour','c_shiftHour@index');
  //add shift Hour
  Route::post('process_add_shiftHour', 'c_shiftHour@process_add_shiftHour')->name('add_data_shiftHour');
 
+//shift
  Route::get('/shifts','c_shift@index');
  Route::post('process_add_shift', 'c_shift@process_add_shift')->name('add_data_shift');
+ Route::post('uploud_shift','c_shift@uploadShiftXls')->name('uploud_shift');
 
+ //absen
  Route::get('/absen','c_absen@index');
 
  
