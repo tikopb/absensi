@@ -19,8 +19,8 @@ class CreateAbsensTable extends Migration
             $table->timestamps();
             $table->string('nik', 100);
             $table->string('nama', 100);
-            $table->time('in', 0);
-            $table->time('out', 0);
+            $table->time('timein', 0);
+            $table->time('timeout', 0);
             $table->bigInteger('karyawan_id');
             $table->bigInteger('shift_id');
             $table->string('description', 100);

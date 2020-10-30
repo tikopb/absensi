@@ -45,8 +45,8 @@
                     <td>{{ $no++}}</td>
                     <td>{{ $dAbsen->tanggal}}</td>
                     <td>{{ $dAbsen->karyawanName}}</td>
-                    <td>{{ $dAbsen->in}}</td>
-                    <td>{{ $dAbsen->out}}</td>
+                    <td>{{ $dAbsen->timein}}</td>
+                    <td>{{ $dAbsen->timeout}}</td>
                     <td>{{ $dAbsen->description}}</td>
                     <td>
                         <!-- modal action  start -->
@@ -81,13 +81,13 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Tambah karyawan</h4>
+        <h4 class="modal-title">Tambah Absen Manual</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url('process_add_karyawan') }}" method="POST">
+        <form action="{{ url('process_add_manual_absen') }}" method="POST">
           @csrf
           <div class="form-group">
             <label for="in_karyawan_id">Karyawan</label>
@@ -103,15 +103,23 @@
           <div class="form-group">
             <label>Tanggal</label>
               <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                  <input type="text" name="testname"  id="reservationdate-from" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                  <input type="text" name="date_absen"  id="reservationdate-from" class="form-control datetimepicker-input" data-target="#reservationdate"/>
                   <div class="input-group-append" data-target="#reservationdate-from" data-toggle="datetimepicker">
                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                   </div>
               </div>
           </div>
           <div class="form-group">
+              <label for="in_app_name">In</label>
+              <input type="time" name="in_ab_in" class="form-control" id="in_app_name" placeholder="In" required>
+            </div>
+            <div class="form-group">
+              <label for="in_app_name">Out</label>
+              <input type="time" name="in_ab_out" class="form-control" id="in_app_name" placeholder="Out" required>
+            </div>
+          <div class="form-group">
             <label for="in_app_name">Description</label>
-            <input type="text" name="in_kr_barcode" class="form-control" id="in_absen_description" placeholder="Description" required>
+            <input type="text" name="in_ab_des" class="form-control" id="in_absen_description" placeholder="Description" required>
           </div>
       </div>
       <div class="modal-footer justify-content-between">

@@ -31,5 +31,6 @@ Route::get('/shiftHour','c_shiftHour@index');
 
  //absen
  Route::get('/absen','c_absen@index');
+ Route::post('process_add_manual_absen','c_absen@process_manual_absen')->name('process_add_manual_absen');
 
  

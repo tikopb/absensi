@@ -52,15 +52,7 @@ class c_shift extends Controller
     }
 
     public function DownloadShiftXls(Request $request){
-        $period = new DatePeriod(
-            new DateTime($request->input('reservationdate-from')),
-            new DateInterval('P1D'),
-            new DateTime($request->input('reservationdate-to'))
-        );
-        foreach($period as $date){
-            $data = array ($date->format("Ymd"));
-        };
-        dd($data);
+        $period = returnDates($request->input('reservationdate-from'),$request->input('reservationdate-to'));
         $d_karyawan = DB::table('karyawans')
         ->where('is_active',true)->get();
 
@@ -70,11 +62,13 @@ class c_shift extends Controller
                 $sheet->appendRow(array(
                     'nama','tanggal','shift'
                 ));
-                $data->chunk(100, function($rows) use ($sheet,$period, $d_karyawan){
-                    foreach ($period as $d_period) {
+                $period->chunk(100, function($rows) use ($sheet,$period, $d_karyawan){
+                    foreach ($rows as $row){
                         foreach($d_karyawan as $d_karyawan ) {
                             $sheet->appendRow(array(
-                                $d_karyawan->nama
+                                $d_karyawan->nama,
+                                $dataPeriod,
+                                ' '
                             ));
                         }   
                     }
@@ -148,5 +142,15 @@ class c_shift extends Controller
             DB::table('shifts')->where('shift_id',$d_shift->shift_id)->update($data);
         }
         return true;
+    }
+
+    public function returnDates($fromdate, $todate) {
+        $fromdate = \DateTime::createFromFormat('d/m/Y', $fromdate);
+        $todate = \DateTime::createFromFormat('d/m/Y', $todate);
+        return new \DatePeriod(
+            $fromdate,
+            new \DateInterval('P1D'),
+            $todate->modify('+1 day')
+        );
     }
 }

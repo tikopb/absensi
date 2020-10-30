@@ -25,7 +25,7 @@ class c_absen extends Controller
         $dataAbsen = DB::table('absens')
         ->leftJoin('shifts', 'absens.shift_id', '=', 'shifts.shift_id')
         ->leftJoin('karyawans', 'absens.karyawan_id', '=', 'karyawans.karyawan_id')
-        ->select('shifts.tanggal', 'karyawans.nama as karyawanName','absens.in','absens.out','absens.description')
+        ->select('shifts.tanggal', 'karyawans.nama as karyawanName','absens.timein','absens.timeout','absens.description')
         ->orderby('shifts.tanggal')
         ->get();
 
@@ -110,5 +110,47 @@ class c_absen extends Controller
                 }
             }
         }
+    }
+
+    public function process_manual_absen(Request $request)
+    {
+        $karyawan_id = $request->input('in_karyawan_id');
+        $d_karyawan = DB::table('karyawans')
+        ->where('is_active',true)->where('karyawan_id',$karyawan_id)
+        ->first();
+
+        $tanggal = $request->input('date_absen');
+        $d_shift = DB::table('shifts')
+        ->where('is_active',true)->where('tanggal',$tanggal)
+        ->where('karyawan_id',$karyawan_id)
+        ->first();
+
+        $d_absens = DB::table('absens')
+        ->where('is_active',true)->where('karyawan_id',$karyawan_id)
+        ->where('shift_id',$d_shift->shift_id)->first();
+
+        if($d_absens == null){
+            $data = array(
+                'created_at'  => now(),
+                'updated_at'   => now(),
+                'karyawan_id' => $karyawan_id,
+                'nik'         => $d_karyawan->nik,
+                'nama'        => $d_karyawan->nama,
+                'timein'      => $request->input('in_ab_in'),
+                'timeout'     => $request->input('in_ab_out'),
+                'shift_id'    => $d_shift->shift_id,
+                'description' => $request->input('in_ab_des')
+            );
+            DB::table('absens')->insert($data);
+        }else {
+            $data = array(
+                'updated_at' => now(),
+                'timein'      => $request->input('in_ab_in'),
+                'timeout'     => $request->input('in_ab_out'),
+                'description' => $request->input('in_ab_des')
+            );
+            DB::table('absens')->where('absen_id',$d_absens->absen_id)->update($data);
+        }
+        return redirect(url('absen'));
     }
 }
