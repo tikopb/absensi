@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   
+  <meta http-equiv="refresh" content="3;url=http://127.0.0.1:8000/" />
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -24,38 +25,27 @@
   </div>
   <!-- /.login-logo -->
   <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Scan barcode card anda
-      </p>
+    <div class="card-header">
+      <h3 class="card-title"><b>SUCESS</b></h3>
 
-      <form action="{{ url('process-absen') }}" method="post">
-        @csrf
-        <div class="input-group mb-3">
-          <input type="text" name="in_app_barcode" class="form-control" placeholder="Barcode ID" autofocus>
-          <div class="input-group-append">
-            <div class="input-group-text">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block" hidden>Absen</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-      
-      <p class="login-box-msg">
-        <t1><b>ANDA HANYA DAPAT ABSEN MASUK SATU KALI SAJA!</b></t1>
-      </p>
-
-      {{-- <button type="button" class="btn btn-success toastsDefaultSuccess">
-        Launch Success Toast
-      </button> --}}
-      <!-- <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p> -->
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+          <i class="fas fa-minus"></i>
+        </button>
+        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
     </div>
+    <div class="card-body">
+      Absen pulang anda sudah bermasil masuk
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+      Ati ati di jalan ya  ^_^
+    </div>
+    <!-- /.card-footer-->
+  </div>
     <!-- /.login-card-body -->
   </div>
 </div>

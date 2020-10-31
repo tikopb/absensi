@@ -17,10 +17,10 @@ class CreateAbsensTable extends Migration
             $table->bigIncrements('absen_id');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            $table->string('nik', 100);
-            $table->string('nama', 100);
+            $table->string('nik', 100)->nullable();
+            $table->string('nama', 100)->nullable();
             $table->time('timein', 0);
-            $table->time('timeout', 0);
+            $table->time('timeout', 0)->nullable();
             $table->bigInteger('karyawan_id');
             $table->bigInteger('shift_id');
             $table->string('description', 100);

@@ -16,6 +16,16 @@ class c_absen extends Controller
     {
         return view('v_homeabsen');   
     }
+
+    public function homeAbsenInSucess()
+    {
+        return view('v_homeabsen_sucessin');   
+    }
+
+    public function homeAbsenOutSucess()
+    {
+        return view('v_homeabsen_sucessout');   
+    }
     
     public function index()
     {
@@ -40,7 +50,7 @@ class c_absen extends Controller
     }
 
     //app
-    public function process_absen(Request $request)
+    public function process_absen2(Request $request)
     {
         $now = Carbon::now()->format('H:i');
         //dd($now);
@@ -112,6 +122,63 @@ class c_absen extends Controller
         }
     }
 
+    public function process_absen(Request $request)
+    {   
+        $d_karyawan = DB::table('karyawans')
+        ->where('is_active',true)->where('barcode',$request->input('in_app_barcode'))
+        ->first();
+
+        $d_shift = DB::table('shifts')
+        ->where('is_active',true)->where('karyawan_id',$d_karyawan->karyawan_id)
+        ->where('tanggal',now())->first();
+
+        if($d_karyawan != null){
+            if($d_shift!=null){
+                $d_absen = DB::table('absens')
+                ->where('is_active',true)->where('karyawan_id',$d_karyawan->karyawan_id)
+                ->where('shift_id',$d_shift->shift_id)->first();
+
+                $d_shifthour = DB::table('shifthours') 
+                ->where('is_active',true)->where('shifthours_id',$d_shift->shifthours_id)
+                ->first();
+
+                $timeShiftin = strtotime($d_shifthour->timein);
+                $cur_time    = strtotime(now());
+
+                if($timeShiftin > $cur_time)
+                {
+                    $keterangan = 'Tidak Terlambat';
+                }else 
+                {
+                    $keterangan = 'Terlambat';
+                }
+
+                if($d_absen == null ){
+                    $data = array(
+                        'created_at'  => now(),
+                        'updated_at'   => now(),
+                        'karyawan_id' => $d_karyawan->karyawan_id,
+                        'nik'         => $d_karyawan->nik,
+                        'nama'        => $d_karyawan->nama,
+                        'timein'      => now(),
+                        'shift_id'    => $d_shift->shift_id,
+                        'description' => $keterangan
+                    );
+                    DB::table('absens')->insert($data);
+                    return redirect(url('/abseninsucess'));
+                }else{
+                    $data = array(
+                        'updated_at' => now(),
+                        'timeout'     => now(),
+                        'description' => $keterangan
+                    );
+                    DB::table('absens')->where('absen_id',$d_absen->absen_id)->update($data);
+                    return redirect(url('/absenoutsucess'));
+                }
+                
+            }
+        }
+    }
     public function process_manual_absen(Request $request)
     {
         $karyawan_id = $request->input('in_karyawan_id');

@@ -22,7 +22,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <!-- daterange picker -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.css') }}">
-  
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/toastr/toastr.min.css') }}">
+
 </head>
 {{-- <body class="hold-transition sidebar-mini {{ $sidebar }}"> --}}
 <div class="wrapper">
@@ -135,6 +137,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- bs-custom-file-input -->
 <script src="{{ asset('adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+<!-- Toastr -->
+<script src="{{ asset('adminlte/plugins/toastr/toastr.min.js') }}"></script>
 
 <!-- Page specific script -->
 <script>
@@ -227,6 +231,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     $('#reservationdate-to').daterangepicker({
       "singleDatePicker": true,
+    });
+
+    $('.toastsDefaultSuccess').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-success',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
     });
 
     $(function () {

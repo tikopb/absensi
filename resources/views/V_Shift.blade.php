@@ -22,10 +22,10 @@
                 <a href="#" class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#Modal-add-shift"><i class='fas fa-plus-circle'></i> Input Manual Absen</a>
               </div>   
               <div class="col-lg-2">
-                <a href="#" class="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#Modal-download-shift"><i class='fas fa-download'></i> Download Absen</a>
+                <a href="#" class="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#Modal-download-shift"><i class='fas fa-download'></i> Download Shift</a>
               </div>  
               <div class="col-lg-2">
-                <a href="#" class="btn btn-block btn-info btn-sm" data-toggle="modal" data-target="#Modal-import-shift"><i class='fas fa-upload'></i> Import Absen</a>
+                <a href="#" class="btn btn-block btn-info btn-sm" data-toggle="modal" data-target="#Modal-import-shift"><i class='fas fa-upload'></i> Import Shift</a>
               </div> 
             </div>
             <br>

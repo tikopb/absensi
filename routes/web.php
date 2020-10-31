@@ -12,8 +12,11 @@
 */
 
 Route::get('/', 'c_absen@homeAbsen');
+Route::get('/abseninsucess', 'c_absen@homeAbsenInSucess');
+Route::get('/absenoutsucess', 'c_absen@homeAbsenOutSucess');
 Route::post('process-absen', 'c_absen@process_absen')->name('process_absen');
 Route::get('/home', 'HomeController@index');
+
 
 Route::get('/karyawan', 'c_karyawan@index');
  //add karyawan

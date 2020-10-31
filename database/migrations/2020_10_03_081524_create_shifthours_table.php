@@ -19,9 +19,9 @@ class CreateShifthoursTable extends Migration
             $table->timestamps();
             $table->string('value', 5);
             $table->string('nama', 100);
-            $table->time('in', 0);
-            $table->time('out', 0);
-            $table->string('description', 10);
+            $table->time('timein', 0);
+            $table->time('timeout', 0);
+            $table->string('description', 10)->nullable();
         });
     }
 

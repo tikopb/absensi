@@ -20,7 +20,8 @@ class CreateKaryawansTable extends Migration
             $table->string('nik', 100);
             $table->string('nama', 100);
             $table->string('barcode', 100);
-            $table->string('fingerprint', 100);
+            $table->string('fingerprint', 100)->nullable();
+            $table->string('email', 100)->nullable();
         });
     }
 

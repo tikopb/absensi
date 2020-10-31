@@ -33,8 +33,8 @@ class c_shiftHour extends Controller
             'updated_at'  => now(),
             'value'       => strtoupper($shiftHour_value),
             'nama'        => strtoupper($shiftHour_nama),
-            'in'          => $shiftHour_in,
-            'out'         => $shiftHour_out,
+            'timein'          => $shiftHour_in,
+            'timeout'         => $shiftHour_out,
             'description' => ' '
         );
         $M_shiftHour->add_data_shiftHour('shifthours', $data);

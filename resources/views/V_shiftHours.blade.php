@@ -44,8 +44,8 @@
                     <td>{{ $no++}}</td>
                     <td>{{ $dshiftHour->value }}</td>
                     <td>{{ $dshiftHour->nama }}</td>
-                    <td>{{ $dshiftHour->in }}</td>
-                    <td>{{ $dshiftHour->out }}</td>
+                    <td>{{ $dshiftHour->timein }}</td>
+                    <td>{{ $dshiftHour->timeout }}</td>
                     <td>
                         <!-- modal action  start -->
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#Modal-edit-product-category">
