@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   
-  <meta http-equiv="refresh" content="3;url=http://127.0.0.1:8000/" />
+  <meta http-equiv="refresh" content="2;url=http://127.0.0.1:8000/" />
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -24,17 +24,18 @@
     <a href="../../index2.html"><b>Absensi</b> AJS System</a>
   </div>
   <!-- /.login-logo -->
-  <div class="card bg-success">
+  <div class="card bg-danger">
     <div class="card-header">
-      <h3 class="card-title"><b>SUCESS</b></h3>
-
+      <h3 class="card-title"><b>GAGAL</b></h3>
     </div>
     <div class="card-body">
-      Absen anda sudah bermasil masuk
+      <t5>
+        <b>HUBUNGI ADMIN UNTUK CEK DATA ABSENSI!</b>
+      </t5>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-      semangat kerja ^_^
+    
     </div>
     <!-- /.card-footer-->
   </div>
