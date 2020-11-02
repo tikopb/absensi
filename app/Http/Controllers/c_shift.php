@@ -52,29 +52,41 @@ class c_shift extends Controller
     }
 
     public function DownloadShiftXls(Request $request){
-        $period = returnDates($request->input('reservationdate-from'),$request->input('reservationdate-to'));
-        $d_karyawan = DB::table('karyawans')
-        ->where('is_active',true)->get();
+        //$period = returnDatesInterval($request->input('reservationdate-from'),$request->input('reservationdate-to'));
+        //$fromdate = \DateTime::createFromFormat('Y-m-d', $request->input('reservationdate-from'));
+        //$todate = \DateTime::createFromFormat('Y-m-d', $request->input('reservationdate-to'));
+        // $period = new \DatePeriod(
+        //     $fromdate,
+        //     new \DateInterval('P1D'),
+        //     $todate->modify('+1 day')
+        // );
+        $fromdate = date_format(date_create($request->input('reservationdate-from')), 'Y-m-d');
+        $todate = date_format(date_create($request->input('reservationdate-to')), 'Y-m-d');
+        $period =  date_diff(date_create($fromdate),date_create($todate))->format('%d days');
 
+        $d_karyawan = DB::table('karyawans')
+        ->where('is_active',true)->orderby('karyawan_id','asc')->get();
+        
         $filename = 'Data Shift Between '.$request->input('reservationdate-from').' - until -  '.$request->input('reservationdate-to');
-        $export = \Excel::create($filename, function($excel) use ($period, $d_karyawan) {
-            $excel->sheet('shift', function($sheet) use($period, $d_karyawan) {
+        $export = \Excel::create($filename, function($excel) use ($period, $d_karyawan,$fromdate) {
+            $excel->sheet('shift', function($sheet) use($period, $d_karyawan,$fromdate) {
                 $sheet->appendRow(array(
                     'nama','tanggal','shift'
                 ));
-                $period->chunk(100, function($rows) use ($sheet,$period, $d_karyawan){
-                    foreach ($rows as $row){
-                        foreach($d_karyawan as $d_karyawan ) {
-                            $sheet->appendRow(array(
-                                $d_karyawan->nama,
-                                $dataPeriod,
-                                ' '
-                            ));
-                        }   
-                    }
-                });
+            
+                for ($i = 0; $i <= $period; $i++) {
+                    foreach($d_karyawan as $rowkaryawan) {
+                        $sheet->appendRow(array(
+                            $rowkaryawan->nama,
+                            date('Y-m-d',strtotime($fromdate . "+".$i." days")),
+                            ' '
+                        ));
+                    }   
+                }
             });
-        });
+        })->download('xlsx');
+        
+        return response()->json('Success exporting', 200);
     }
 
     public function uploadShiftXls(Request $request){
@@ -144,7 +156,7 @@ class c_shift extends Controller
         return true;
     }
 
-    public function returnDates($fromdate, $todate) {
+    public function returnDatesInterval($fromdate, $todate) {
         $fromdate = \DateTime::createFromFormat('d/m/Y', $fromdate);
         $todate = \DateTime::createFromFormat('d/m/Y', $todate);
         return new \DatePeriod(
