@@ -4,19 +4,44 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\M_Karyawan;
-
+use DB;
+use DataTables;
 
 class c_karyawan extends Controller
 {
     public function index()
     {
+        return view('V_karyawan');
+    }
+
+    public function GetKaryawan(){
+        $data = DB::table('karyawans')
+        ->where('is_active',true);
+
+        return DataTables::of($data)
+                ->addColumn('option',function($data){
+                    return ' <button type="button" id="Modal-edit-karyawan" name="Modal-edit-karyawan" class="btn btn-info"  data-id="'.$data->$karyawan_id.'" >
+                    <i class="fas fa-pencil-alt">
+                    </i>
+                        Edit
+                    </button>
+                    <button type="button" id="Modal-delete-karyawan" name="Modal-delete-karyawan"class="btn btn-danger"  data-id="'.$data->$karyawan_id.'">
+                        <i class="fas fa-trash">
+                        </i>
+                            Delete
+                    </button>';
+                })
+                ->rawcolumns(['option'])
+                ->make(true);
+    }
+
+    public function GetDetailKaryawan(Request $request)
+    {
         $M_Karyawan = new M_Karyawan();
         $where = array('is_active'=>'t');
-        $d_karyawan = $M_Karyawan->view_data('karyawans',$where)->get();
-        $data = array (
-            'data_karyawan' => $d_karyawan
-        );
-        return view('V_karyawan',$data);
+        $d_karyawan = $M_Karyawan->view_data('karyawans',$where)->first();
+      
+        dd($d_karyawan);
     }
 
     //app

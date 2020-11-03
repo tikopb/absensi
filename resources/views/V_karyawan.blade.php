@@ -24,7 +24,7 @@
             </div>
             <br>
             <div class="table-responsive">
-              <table id="DataTable-App" class="table table-bordered table-striped">
+              <table id="DataTable-Karyawan" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th style="background-color:#66A1D2;" width="5%">No</th>
@@ -35,31 +35,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php
-		                $no=1;
-		                foreach ($data_karyawan as $dkaryawan) {
-                  ?>
-                  <tr>
-                    <td>{{ $no++}}</td>
-                    <td>{{ $dkaryawan->nik }}</td>
-                    <td>{{ $dkaryawan->nama }}</td>
-                    <td>{{ $dkaryawan->barcode }}</td>
-                    <td>
-                        <!-- modal action  start -->
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#Modal-edit-product-category">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                    Edit
-                            </button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-product-category">
-                                <i class="fas fa-trash">
-                                </i>
-                                    Delete
-                            </button>
-                        <!-- //modal action end -->
-                    </td>
-                  </tr>
-                  <?php } ?>
+                  
                 </tbody>
               </table>
             </div>
@@ -94,8 +70,8 @@
               <input type="text" name="in_kr_nama" class="form-control" id="in_app_name" placeholder="Nama Karyawan" required>
             </div>
             <div class="form-group">
-              <label for="in_app_name">Kode Barcode</label>
-              <input type="text" name="in_kr_barcode" class="form-control" id="in_app_name" placeholder="Kode Barcode" required>
+              <label for="in_app_barcode">Kode Barcode</label>
+              <input type="text" name="in_kr_barcode" class="form-control" id="in_app_barcode" placeholder="Kode Barcode" required>
             </div>
       </div>
       <div class="modal-footer justify-content-between">
@@ -107,5 +83,97 @@
   </div><!-- /.modal-dialog -->
 </div>
 <!-- Modal Add Karyawan -->
+@endsection
 
+@section('script')
+  <script>
+    $(document).ready(function(){
+       $('#DataTable-App').on('click','.Modal-edit-karyawan',function(){
+          var id=$(this).data('id');
+          console.log(id);
+
+          $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+            });
+          $.ajax({
+            type: 'get',
+            url: "{{ route('GetKaryawan') }}",
+            data: {invoice:invoice,po:po,plan:plan},
+            success: function(response){
+            $('#rm_order').val(response.remark_order);
+            $('#rm_exim').val(response.remark_exim);
+            $('#rm_cont').val(response.remark_cont);
+            },
+            error: function(response) {
+            console.log(response)
+            return false;
+            }
+          });
+      }); 
+
+      $.extend( $.fn.dataTable.defaults, {
+        stateSave: true,
+        autoWidth: false,
+        autoLength: false,
+        processing: true,
+        serverSide: true,
+        searching:false,
+        dom: '<"datatable-header"fBl><t><"datatable-footer"ip>',
+        language: {
+        search: '<span>Filter:</span> _INPUT_',
+        searchPlaceholder: 'Type to filter...',
+        lengthMenu: '<span>Show:</span> _MENU_',
+        paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+        }
+        });
+
+        var _token = $("input[name='_token']").val();
+        var table = $('#DataTable-Karyawan').DataTable({
+        ajax: {
+        url: "{{Route('GetKaryawan')}}",
+        type: 'get',
+        data: function (d) {
+            return $.extend({},d,{
+            
+            "_token": _token
+            });
+          }
+        },
+
+        fnCreatedRow: function (row, data, index) {
+        var info = table.page.info();
+        var value = index+1+info.start;
+        $('td', row).eq(0).html(value);
+
+        },
+        columnDefs: [
+        {
+        className: 'dt-center'
+        }
+        ],
+        columns: [
+        {data: null, sortable: false, orderable: false, searchable: false},
+          {data: 'nik', name: 'nik'},
+          {data: 'nama', name: 'nama'},
+          {data: 'barcode', name: 'barcode'},
+          {data: 'option', name: 'option'},
+          ],
+        });
+        
+    table.on('preDraw',function(){
+      Pace.start();
+    })
+    .on('draw.dt',function(){
+      $('#DataTable-Karyawan').unblock();
+      Pace.stop();
+    });
+
+    $(window).on('load',function(){
+      table.draw();
+    });
+    
+  });
+  </script>
 @endsection

@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index');
 Route::get('/karyawan', 'c_karyawan@index');
  //add karyawan
  Route::post('process_add_karyawan', 'c_karyawan@process_add_karyawan')->name('process_add_karyawan');
+ Route::get('/datakaryawandetail','c_karyawan@GetDetailKaryawan')->name('GetKaryawanDetail');
+ Route::get('/datakaryawan','c_karyawan@GetKaryawan')->name('GetKaryawan');
 
 Route::get('/shiftHour','c_shiftHour@index');
  //add shift Hour

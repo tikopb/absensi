@@ -121,10 +121,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Bootstrap 4 -->
 <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- DataTables -->
+<script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/datatable/datatables.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
 <!-- DataTables -->
@@ -139,49 +142,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 <!-- Toastr -->
 <script src="{{ asset('adminlte/plugins/toastr/toastr.min.js') }}"></script>
-
-<!-- Page specific script -->
-<script>
-  $('#DataTable-App').DataTable({
-    "paging": true,
-    "lengthChange": true,
-    "searching": true,
-    "ordering": true,
-    "info": true,
-    "autoWidth": true,
-    "responsive": true,
-  });
-
-  $('#DataTable-Role').DataTable({
-    "paging": true,
-    "lengthChange": true,
-    "searching": true,
-    "ordering": true,
-    "info": true,
-    "autoWidth": true,
-    "responsive": true,
-  });
-
-  $('#DataTable-Organization').DataTable({
-    "paging": true,
-    "lengthChange": true,
-    "searching": true,
-    "ordering": true,
-    "info": true,
-    "autoWidth": true,
-    "responsive": true,
-  });
-
-  $('#DataTable-Client').DataTable({
-    "paging": true,
-    "lengthChange": true,
-    "searching": true,
-    "ordering": true,
-    "info": true,
-    "autoWidth": true,
-    "responsive": true,
-  });
-</script>
 
 <!-- Collapse Open or Close -->
 <script>
@@ -210,15 +170,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
         
     }
     
-    $('#DataTable').DataTable({
-      "paging": true,
-      "lengthChange": true,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": true,
-      "responsive": true,
-    });
+    // $('#DataTable').DataTable({
+    //   "paging": true,
+    //   "lengthChange": true,
+    //   "searching": true,
+    //   "ordering": true,
+    //   "info": true,
+    //   "autoWidth": true,
+    //   "responsive": true,
+    // });
 
     //Date range picker
     $('#reservationdate-add').daterangepicker({
@@ -245,7 +205,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     $(function () {
       bsCustomFileInput.init();
     });
+
 </script>
+
+@yield("script")
 
 </body>
 </html>
