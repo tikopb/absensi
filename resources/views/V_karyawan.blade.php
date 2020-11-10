@@ -97,6 +97,10 @@
               <label for="in_app_name">Kode Barcode</label>
               <input type="text" name="in_kr_barcode" class="form-control" id="in_app_name" placeholder="Kode Barcode" required>
             </div>
+            <div class="form-group">
+              <label for="in_app_name">Email</label>
+              <input type="text" name="in_kr_email" class="form-control" id="in_app_name" placeholder="Someone@email.com" required>
+            </div>
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

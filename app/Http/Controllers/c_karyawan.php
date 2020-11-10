@@ -26,13 +26,15 @@ class c_karyawan extends Controller
         $karyawan_nik = $request->input('in_kr_nik');
         $karyawan_nama = $request->input('in_kr_nama');
         $karyawan_barcode = $request->input('in_kr_barcode');
+        $email = $request->input('in_kr_email');
         $data = array(
             'created_at' => now(),
             'updated_at' => now(),
             'nik' => $karyawan_nik,
             'nama' => strtoupper($karyawan_nama),
             'barcode' => $karyawan_barcode,
-            'fingerprint' => 'default'
+            'fingerprint' => 'default',
+            'email' => $email
         );
         $M_Karyawan->add_data_karyawan('karyawans', $data);
         return redirect(url('karyawan'));
