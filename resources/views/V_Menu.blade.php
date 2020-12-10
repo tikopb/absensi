@@ -50,12 +50,25 @@
           </li>
 
           <li class="nav-item">
-            <a href="/absen" class="nav-link">
+            <a href="/absensi" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Absen
               </p>
             </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              <i class="nav-icon fas fa-power-off"></i>
+              <p>
+                Log Out
+              </p>
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
           </li>
 		  
         </ul>
