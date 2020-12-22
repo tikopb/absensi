@@ -31,7 +31,7 @@
       <form action="{{ url('process-absen') }}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input type="text" name="in_app_barcode" class="form-control" placeholder="Barcode ID" autofocus>
+          <input type="text" name="in_app_barcode" class="form-control" placeholder="Barcode ID" autofocus >
           <div class="input-group-append">
             <div class="input-group-text">
             </div>

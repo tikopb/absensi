@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   
-  <meta http-equiv="refresh" content="3;url=http://127.0.0.1:8000/" />
+  <meta http-equiv="refresh" content="3;url={{route('homepage')}}" />
+  
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">

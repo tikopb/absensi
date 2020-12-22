@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'c_absen@homeAbsen');
+Route::get('/', 'c_absen@homeAbsen')->name('homepage');
 Route::get('/abseninsucess', 'c_absen@homeAbsenInSucess');
 Route::get('/absenoutsucess', 'c_absen@homeAbsenOutSucess');
 Route::get('/absenfail', 'c_absen@homeAbsenFail');
