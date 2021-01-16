@@ -52,14 +52,6 @@ class c_shift extends Controller
     }
 
     public function DownloadShiftXls(Request $request){
-        //$period = returnDatesInterval($request->input('reservationdate-from'),$request->input('reservationdate-to'));
-        //$fromdate = \DateTime::createFromFormat('Y-m-d', $request->input('reservationdate-from'));
-        //$todate = \DateTime::createFromFormat('Y-m-d', $request->input('reservationdate-to'));
-        // $period = new \DatePeriod(
-        //     $fromdate,
-        //     new \DateInterval('P1D'),
-        //     $todate->modify('+1 day')
-        // );
         $fromdate = date_format(date_create($request->input('reservationdate-from')), 'Y-m-d');
         $todate = date_format(date_create($request->input('reservationdate-to')), 'Y-m-d');
         $period =  date_diff(date_create($fromdate),date_create($todate))->format('%d days');

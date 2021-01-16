@@ -58,6 +58,35 @@
             </a>
           </li>
 
+          <li class="nav-item menu-close">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                REPORT
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/karyawan" class="nav-link">
+                  <i class="nav-icon fas fa-address-book"></i>
+                  <p>
+                    Absensi Per Period
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/shiftHour" class="nav-link">
+                  <i class="nav-icon fas fa-hourglass"></i>
+                  <p>
+                    Absensi Per Karyawan
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
               <i class="nav-icon fas fa-power-off"></i>
