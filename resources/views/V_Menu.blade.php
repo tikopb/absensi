@@ -62,13 +62,13 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
-                REPORT
+                Report
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/karyawan" class="nav-link">
+                <a href="/report_per_period" class="nav-link">
                   <i class="nav-icon fas fa-address-book"></i>
                   <p>
                     Absensi Per Period

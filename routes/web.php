@@ -39,5 +39,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('process_add_manual_absen','c_absen@process_manual_absen')->name('process_add_manual_absen');
 
     //report 
-    
+    Route::get('/report_per_period','reportingController\C_R_PerPeriod@index');
 });
