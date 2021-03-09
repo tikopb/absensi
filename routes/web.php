@@ -16,6 +16,9 @@ Route::get('/abseninsucess', 'c_absen@homeAbsenInSucess');
 Route::get('/absenoutsucess', 'c_absen@homeAbsenOutSucess');
 Route::get('/absenfail', 'c_absen@homeAbsenFail');
 Route::post('process-absen', 'c_absen@process_absen')->name('process_absen');
+Route::get('/cekAbsen', 'c_cekAbsen@home')->name('cek_absen');
+
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
@@ -29,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('process_add_shiftHour', 'c_shiftHour@process_add_shiftHour')->name('add_data_shiftHour');
 
     //shift
-    Route::get('/shifts','c_shift@index');
+    Route::get('/shifts','c_shift@index')->name('shifts');
     Route::post('process_add_shift', 'c_shift@process_add_shift')->name('add_data_shift');
     Route::post('uploud_shift','c_shift@uploadShiftXls')->name('uploud_shift');
     Route::post('download_shift','c_shift@DownloadShiftXls')->name('download_shift');

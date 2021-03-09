@@ -57,7 +57,7 @@ class c_shift extends Controller
         $period =  date_diff(date_create($fromdate),date_create($todate))->format('%d days');
 
         $d_karyawan = DB::table('karyawans')
-        ->where('is_active',true)->orderby('karyawan_id','asc')->get();
+        ->where('is_active',true)->orderby('nama','asc')->get();
         
         $filename = 'Data Shift Between '.$request->input('reservationdate-from').' - until -  '.$request->input('reservationdate-to');
         $export = \Excel::create($filename, function($excel) use ($period, $d_karyawan,$fromdate) {

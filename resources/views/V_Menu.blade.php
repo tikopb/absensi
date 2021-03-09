@@ -41,7 +41,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/shifts" class="nav-link">
+            <a href="{{route('shifts')}}" class="nav-link">
               <i class="nav-icon fas fa-database"></i>
               <p>
                 Shift
