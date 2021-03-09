@@ -32,7 +32,7 @@
                     <th style="background-color:#66A1D2;" width="20%">Nama</th>
                     <th style="background-color:#66A1D2;" width="10%">In</th>
                     <th style="background-color:#66A1D2;" width="10%">Out</th>
-                    <th style="background-color:#66A1D2;" width="15%">Option</th>
+                   
                   </tr>
                 </thead>
                 <tbody>
@@ -46,20 +46,7 @@
                     <td>{{ $dshiftHour->nama }}</td>
                     <td>{{ $dshiftHour->timein }}</td>
                     <td>{{ $dshiftHour->timeout }}</td>
-                    <td>
-                        <!-- modal action  start -->
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#Modal-edit-product-category">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                    Edit
-                            </button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-product-category">
-                                <i class="fas fa-trash">
-                                </i>
-                                    Delete
-                            </button>
-                        <!-- //modal action end -->
-                    </td>
+                    
                   </tr>
                   <?php } ?>
                 </tbody>

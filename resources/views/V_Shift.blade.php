@@ -38,7 +38,6 @@
                     <th style="background-color:#66A1D2;" width="20%">Nama Karyawan</th>
                     <th style="background-color:#66A1D2;" width="10%">Shift</th>
                     <th style="background-color:#66A1D2;" width="10%">Tanggal</th>
-                    <th style="background-color:#66A1D2;" width="15%">Option</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -52,20 +51,6 @@
                     <td>{{ $dshift->karyawanName}}</td>
                     <td>{{ $dshift->shiftName }}</td>
                     <td>{{ $dshift->tanggal }}</td>
-                    <td>
-                        <!-- modal action  start -->
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#Modal-edit-product-category">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                    Edit
-                            </button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-product-category">
-                                <i class="fas fa-trash">
-                                </i>
-                                    Delete
-                            </button>
-                        <!-- //modal action end -->
-                    </td>
                   </tr>
                   <?php } ?>
                 </tbody>

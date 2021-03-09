@@ -21,7 +21,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/karyawan" class="nav-link">
+                <a href="{{route('karyawan')}}" class="nav-link">
                   <i class="nav-icon fas fa-address-book"></i>
                   <p>
                     Data Karyawan
@@ -30,7 +30,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="/shiftHour" class="nav-link">
+                <a href="{{route('shiftHour')}}" class="nav-link">
                   <i class="nav-icon fas fa-hourglass"></i>
                   <p>
                     Jam Kerja
@@ -41,7 +41,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/shifts" class="nav-link">
+            <a href="{{route('shifts')}}" class="nav-link">
               <i class="nav-icon fas fa-database"></i>
               <p>
                 Shift
@@ -50,7 +50,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/absensi" class="nav-link">
+            <a href="{{route('absensi')}}" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Absen

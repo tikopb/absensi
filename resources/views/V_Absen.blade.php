@@ -33,7 +33,6 @@
                     <th style="background-color:#66A1D2;" width="5%">In</th>
                     <th style="background-color:#66A1D2;" width="5%">Out</th>
                     <th style="background-color:#66A1D2;" width="15%">Description</th>
-                    <th style="background-color:#66A1D2;" width="20%">Option</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -48,20 +47,7 @@
                     <td>{{ $dAbsen->timein}}</td>
                     <td>{{ $dAbsen->timeout}}</td>
                     <td>{{ $dAbsen->description}}</td>
-                    <td>
-                        <!-- modal action  start -->
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#Modal-edit-product-category">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                    Edit
-                            </button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-product-category">
-                                <i class="fas fa-trash">
-                                </i>
-                                    Delete
-                            </button>
-                        <!-- //modal action end -->
-                    </td>
+                    
                   </tr>
                   <?php } ?>
                 </tbody>
