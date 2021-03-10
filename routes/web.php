@@ -36,6 +36,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     //absensi
     Route::get('/absensi','c_absen@index')->name('absensi');
-    Route::post('process_add_manual_absen','c_absen@process_manual_absen')->name('process_add_manual_absen')->name('process_add_manual_absen');
+    Route::post('process_add_manual_absen','c_absen@process_manual_absen')->name('process_add_manual_absen');
 
 });
